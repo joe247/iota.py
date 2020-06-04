@@ -20,9 +20,8 @@ class IterUsedAddressesTestCase(TestCase):
 
         # To speed up the tests, we will mock the address generator.
         def address_generator(ag, start, step=1):
-            for addy in [self.address0, self.address1, self.address2,
-                         self.address3][start::step]:
-                yield addy
+            yield from [self.address0, self.address1, self.address2,
+                             self.address3][start::step]
         self.mock_address_generator = address_generator
 
     def seed_unused_address(self):
