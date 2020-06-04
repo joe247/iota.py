@@ -107,12 +107,11 @@ async def get_bundles_from_transaction_hashes(
 
     if non_tail_bundle_hashes:
         for txn in (await FindTransactionObjectsCommand(adapter=adapter)(
-                bundles=list(non_tail_bundle_hashes),
-        ))['transactions']:
-            if txn.is_tail:
-                if txn.hash not in tail_transaction_hashes:
-                    all_transactions.append(txn)
-                    tail_transaction_hashes.add(txn.hash)
+                        bundles=list(non_tail_bundle_hashes),
+                ))['transactions']:
+            if txn.is_tail and txn.hash not in tail_transaction_hashes:
+                all_transactions.append(txn)
+                tail_transaction_hashes.add(txn.hash)
 
     # Filter out all non-tail transactions.
     tail_transactions = [

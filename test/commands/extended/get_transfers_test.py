@@ -384,8 +384,7 @@ class GetTransfersCommandTestCase(TestCase):
     # its own test case, so this does not impact the stability of the
     # codebase.
     def create_generator(ag, start, step=1):
-      for addy in [self.addy1, self.addy2][start::step]:
-        yield addy
+      yield from [self.addy1, self.addy2][start::step]
 
     # The first address received IOTA.
     self.adapter.seed_response(
@@ -485,8 +484,7 @@ class GetTransfersCommandTestCase(TestCase):
     # its own test case, so this does not impact the stability of the
     # codebase.
     def create_generator(ag, start, step=1):
-      for addy in [self.addy1][start::step]:
-        yield addy
+      yield from [self.addy1][start::step]
 
     self.adapter.seed_response(
       'findTransactions',
@@ -518,9 +516,8 @@ class GetTransfersCommandTestCase(TestCase):
     """
     def create_generator(ag, start, step=1):
       # Inject an invalid value into the generator, to ensure it is
-      # skipped.
-      for addy in [None, self.addy1, self.addy2][start::step]:
-        yield addy
+        # skipped.
+      yield from [None, self.addy1, self.addy2][start::step]
 
     # The first address received IOTA.
     self.adapter.seed_response(
@@ -613,9 +610,8 @@ class GetTransfersCommandTestCase(TestCase):
     """
     def create_generator(ag, start, step=1):
       # Inject an invalid value into the generator, to ensure it is
-      # skipped.
-      for addy in [self.addy1, None][start::step]:
-        yield addy
+        # skipped.
+      yield from [self.addy1, None][start::step]
 
     # The first address received IOTA.
     self.adapter.seed_response(
@@ -690,8 +686,7 @@ class GetTransfersCommandTestCase(TestCase):
     Fetching inclusion states with transactions.
     """
     def create_generator(ag, start, step=1):
-      for addy in [self.addy1][start::step]:
-        yield addy
+      yield from [self.addy1][start::step]
 
     # The first address received IOTA.
     self.adapter.seed_response(
